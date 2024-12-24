@@ -36,6 +36,7 @@ exports.handler = async (event, context) => {
       .upsert([{ date, activeSlots }], { onConflict: ['date'] });
 
     if (error) {
+      console.error("Error al guardar en Supabase:", error.message);  // Verificar el error de Supabase
       throw error;
     }
 
@@ -44,6 +45,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ message: 'Fecha salvada satisfactoriamente' }),
     };
   } catch (error) {
+    console.error("Error en la función Lambda:", error.message);  // Verificar los errores
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
