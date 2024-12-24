@@ -2,6 +2,7 @@
 
 async function saveDateToSupabase(date, activeSlots) {
     try {
+      console.log("Guardando datos en Supabase:", { date, activeSlots });  // Verificar qué datos se envían
       const response = await fetch('/.netlify/functions/saveData', {
         method: 'POST',
         headers: {
