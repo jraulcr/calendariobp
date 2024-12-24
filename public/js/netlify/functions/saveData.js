@@ -4,7 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://ymxrrqxpblgegyqptlok.supabase.co';
 //const supabaseKey = process.env.SUPABASE_KEY;
-const supabaseKey = '	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlteHJycXhwYmxnZWd5cXB0bG9rIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTA0MTM2NywiZXhwIjoyMDUwNjE3MzY3fQ.gkL83LJrd5ewIL1UbBPlpm7f9I-cKc_k5QqpcpkQMg8'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlteHJycXhwYmxnZWd5cXB0bG9rIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTA0MTM2NywiZXhwIjoyMDUwNjE3MzY3fQ.gkL83LJrd5ewIL1UbBPlpm7f9I-cKc_k5QqpcpkQMg8'
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 exports.handler = async (event, context) => {
