@@ -1,7 +1,6 @@
 // js/netlify/functions/saveData.js
 
-const Database = require('repl-it-db');
-const db = new Database();
+const axios = require('axios'); // Importar axios si lo necesitas en el backend
 
 exports.handler = async (event, context) => {
   // Manejar el método POST para guardar datos
