@@ -154,10 +154,14 @@
 
         if (storedHolidays) {
           holidays = new Set(storedHolidays);
+                // Sincronizar Replit DB con localStorage
+      localStorage.setItem("holidays", JSON.stringify(storedHolidays));
         }
 
         if (storedActiveSlots) {
           activeSlots = storedActiveSlots;
+                // Sincronizar Replit DB con localStorage
+      localStorage.setItem("activeSlots", JSON.stringify(storedActiveSlots));
         }
         
         updateCalendarWeek();
