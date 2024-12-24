@@ -15,7 +15,8 @@
       "cors": "^2.8.5",
       "crypto-js": "^4.2.0",
       "express": "^4.21.2",
-      "json-server": "^1.0.0-beta.3"
+      "json-server": "^1.0.0-beta.3",
+      "repl-it-db": "^1.0.0"
     },
     "keywords": [],
     "author": "JRC&BPF",
