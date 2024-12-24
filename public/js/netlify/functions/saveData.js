@@ -8,6 +8,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 exports.handler = async (event, context) => {
+  // Verificar que el método HTTP es POST
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -16,8 +17,10 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    // Parsear el cuerpo de la solicitud
     const data = JSON.parse(event.body);
 
+    // Validar los datos requeridos
     if (!data.date || !data.activeSlots) {
       return {
         statusCode: 400,
@@ -27,7 +30,11 @@ exports.handler = async (event, context) => {
 
     const { date, activeSlots } = data;
 
-    const { error } = await supabase.from('calendar').insert([{ date, activeSlots }]);
+    // Usar 'upsert' para evitar duplicados y actualizar si la fecha ya existe
+    const { error } = await supabase
+      .from('calendar')
+      .upsert([{ date, activeSlots }], { onConflict: ['date'] });
+
     if (error) {
       throw error;
     }
