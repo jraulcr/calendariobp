@@ -1,8 +1,4 @@
 [build]
-  publish = "public" # Cambia "public" si tus archivos HTML están en otro directorio
-  functions = "netlify/functions"
-
-[build]
   publish = "./" # Indica que los archivos estáticos están en la raíz
   functions = "js/netlify/functions" # Ruta a tus funciones serverless
 
