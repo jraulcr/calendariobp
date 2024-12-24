@@ -62,6 +62,3 @@ exports.handler = async (event, context) => {
     body: JSON.stringify({ error: 'Método no permitido, usa POST para guardar o GET para listar' }),
   };
 };
-
-  }
-};
