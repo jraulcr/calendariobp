@@ -133,9 +133,37 @@
       "BP": [1, 3]   // Lunes (1) y Miércoles (3)
     };
 
-    function saveData() {
+        // Configuración de Replit DB (utilizando Replit DB cliente en el navegador)
+    const db = new (require('@replit/database'))();
+    
+   async function saveData() {
+      // Guardar en localStorage (para persistencia local)
       localStorage.setItem("holidays", JSON.stringify([...holidays]));
       localStorage.setItem("activeSlots", JSON.stringify(activeSlots));
+
+      // Guardar en Replit DB
+      await db.set("holidays", [...holidays]);
+      await db.set("activeSlots", activeSlots);
+      console.log("Datos guardados correctamente en Replit DB");
+    }
+
+    async function loadCalendarFromReplitDB() {
+      try {
+        const storedHolidays = await db.get("holidays");
+        const storedActiveSlots = await db.get("activeSlots");
+
+        if (storedHolidays) {
+          holidays = new Set(storedHolidays);
+        }
+
+        if (storedActiveSlots) {
+          activeSlots = storedActiveSlots;
+        }
+        
+        updateCalendarWeek();
+      } catch (error) {
+        console.error("Error al cargar datos de Replit DB:", error);
+      }
     }
 
     function updateCalendarWeek() {
