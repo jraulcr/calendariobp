@@ -1,0 +1,8 @@
+[build]
+  publish = "public" # Cambia "public" si tus archivos HTML están en otro directorio
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
