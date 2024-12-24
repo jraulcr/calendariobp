@@ -1,8 +1,11 @@
 //js/saveData.js
-import axios from 'axios'; // Importar Axios para las solicitudes HTTP
-const db = new Database(); // Crear una instancia de la base de datos
-const REPLIT_DB_URL = 'https://calendariobp/.netlify/functions/saveData'; // URL del endpoint de Netlify
 
+import axios from 'axios'; // Importar Axios para las solicitudes HTTP
+
+// URL del endpoint de Netlify que maneja la persistencia en Replit DB
+const REPLIT_DB_URL = 'https://calendariobp/.netlify/functions/saveData'; 
+
+// Función para guardar datos en Replit DB
 async function saveDateToReplitDB(date, activeSlots) {
   try {
     console.log("Guardando datos en Replit DB:", { date, activeSlots }); // Verificar qué datos se envían
@@ -18,8 +21,10 @@ async function saveDateToReplitDB(date, activeSlots) {
   }
 }
 
+// Función para cargar los datos de Replit DB para un calendario específico
 async function loadCalendarFromReplitDB() {
   try {
+    const currentDate = new Date(); // Asegúrate de que currentDate esté definido
     const date = currentDate.toISOString().split("T")[0]; // Fecha actual en formato YYYY-MM-DD
     console.log("Cargando datos para la fecha:", date);
 
@@ -28,7 +33,7 @@ async function loadCalendarFromReplitDB() {
 
     if (response.data) {
       console.log("Datos cargados desde Replit DB:", response.data);
-      updateCalendarWeek(); // Refrescar la vista
+      updateCalendarWeek(); // Refrescar la vista si hay datos
     } else {
       console.log("No se encontraron datos para la fecha:", date);
     }
@@ -37,16 +42,20 @@ async function loadCalendarFromReplitDB() {
   }
 }
 
+// Función para guardar los datos en localStorage y Replit DB
 function saveData() {
-  localStorage.setItem('holidays', JSON.stringify([...holidays]));
+  // Guardar los datos en localStorage si es necesario
+  localStorage.setItem('holidays', JSON.stringify([...holidays])); 
   localStorage.setItem('activeSlots', JSON.stringify(activeSlots));
 
   // Llamar a Replit DB para guardar datos
+  const currentDate = new Date(); // Asegúrate de que currentDate esté definido
   const date = currentDate.toISOString().split('T')[0];
   saveDateToReplitDB(date, activeSlots);
 }
 
+// Cargar los datos cuando la página se haya cargado
 document.addEventListener('DOMContentLoaded', async () => {
   await loadCalendarFromReplitDB();
-  updateCalendarWeek();
+  updateCalendarWeek(); // Asegúrate de que esta función está definida
 });
